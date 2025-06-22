@@ -62,7 +62,8 @@ class PerformanceMetrics:
     
     def __post_init__(self):
         """Calculate derived metrics after initialization."""
-        if self.output_tokens > 0 and self.inference_time > 0:
+        # Only calculate tokens_per_second if it wasn't already set
+        if self.tokens_per_second == 0.0 and self.output_tokens > 0 and self.inference_time > 0:
             self.tokens_per_second = self.output_tokens / self.inference_time
     
     @property
